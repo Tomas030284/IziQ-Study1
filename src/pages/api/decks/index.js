@@ -8,7 +8,7 @@ export default function handlerDecks(req, res) {
     case Methods.GET:
       Handlers.getAllDecksHandler(req, res);
       break;
-    case Methods.POST:
+/*     case Methods.POST:
       Handlers.createDecksHandler(req, res);
       break;
     case Methods.PUT:
@@ -16,7 +16,7 @@ export default function handlerDecks(req, res) {
       break;
     case Methods.DELETE:
       Handlers.deleteDecksHandler(req, res);
-      break;
+      break; */
     default:
       res.status(400).json({ message: "Invalid request method" });
   }
