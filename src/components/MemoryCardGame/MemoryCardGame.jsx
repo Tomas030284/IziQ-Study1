@@ -2,51 +2,42 @@ import React from "react";
 import * as Chakra from "@chakra-ui/react";
 import { useState, useEffect } from "react";
 import ReactCardFlip from "react-card-flip";
-
 import backFace from "../../../public/studyGame.png";
 
-const MemoryCardGame = (name, isBlocked, number) => {
-  /* const [isFlipped, setIsFlipped] = useState(false); */
-  const [isFlipped, setIsFlipped] = useState(name.isBlocked ? false : true);
-
+const MemoryCardGame = (card, isBlocked, number) => {
+  const [isFlipped, setIsFlipped] = useState(card.isBlocked ? false : true);
   const [hasEvent, setHasEvent] = useState(true);
   const [isStarting, setIsStarting] = useState(true);
   const [timeLeft, setTimeLeft] = useState(50);
-
+ 
   useEffect(() => {
-    if (name.unflippedCards.includes(name.number)) {
+    if (card.unflippedCards.includes(card.number)) {
       setTimeout(() => setIsFlipped(false), 700);
     }
-  }, [name.unflippedCards, name.number]);
+  }, [card.unflippedCards, card.number]);
 
   useEffect(() => {
-    if (name.disabledCards.includes(name.number)) {
+    if (card.disabledCards.includes(card.number)) {
       setHasEvent(false);
     }
-  }, [name.disabledCards, name.number]);
+  }, [card.disabledCards, card.number]);
 
   useEffect(() => {
-    if (isStarting && !name.isBlocked) {
+    if (isStarting && !card.isBlocked) {
       setIsFlipped(true);
       setTimeout(() => {
         setIsStarting(false);
         setIsFlipped(false);
       }, 3000);
     }
-  }, [isStarting, !name.isBlocked]);
+  }, [isStarting, !card.isBlocked]);
 
   const handleClick = (e) => {
-    const value = name.flipCard(name.name, name.number);
+    const value = card.flipCard(card.card, card.number);
     if (value !== 0) {
       setIsFlipped(!isFlipped);
     }
   };
-
-  console.log("name.image", name.image);
-  console.log("name", typeof name);
-
-  const keys = Object.keys(name);
-  console.log(keys.length);
 
   return (
     <Chakra.Box
@@ -63,10 +54,10 @@ const MemoryCardGame = (name, isBlocked, number) => {
           height="calc(150px - 10px)"
           width="calc(200px - 10px)"
           border="1px solid black"
-          onClick={hasEvent && !name.isBlocked ? handleClick : null}
+          onClick={hasEvent && !card.isBlocked ? handleClick : null}
         />
 
-        {name.image ? (
+        {card.image ? (
           <Chakra.Box
             height="calc(150px - 10px)"
             width="calc(200px - 10px)"
@@ -79,15 +70,15 @@ const MemoryCardGame = (name, isBlocked, number) => {
               alignItems: "center",
               backgroundColor: "white",
             }}
-            onClick={hasEvent && !name.isBlocked ? handleClick : null}
+            onClick={hasEvent && !card.isBlocked ? handleClick : null}
           >
             <Chakra.Image
               height="calc(100px - 10px)"
               width="calc(100px - 10px)"
-              src={name.image}
+              src={card.image}
               alt="back-face"
             />
-            <h2>{name.frontFace}</h2>
+            <h2>{card.frontFace}</h2>
           </Chakra.Box>
         ) : (
           <Chakra.Textarea
@@ -100,7 +91,7 @@ const MemoryCardGame = (name, isBlocked, number) => {
             bg="#FFFFFF"
             pointerEvents="none"
             //fontFamily="Poppins"
-            value={name.frontFace}
+            value={card.frontFace}
             onClick={hasEvent && !isBlocked ? handleClick : null}
           />
         )}

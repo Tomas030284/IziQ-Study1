@@ -14,7 +14,6 @@ function MemoryCardGame() {
   const [unflippedCards, setUnflippedCards] = useState([]);
   const [disabledCards, setDisabledCards] = useState([]);
   const [numberSuccesses, setnumberSuccesses] = useState(0);
-  const [timeElapsed, setTimeElapsed] = useState(0);
   const [timeLeft, setTimeLeft] = useState(3);
   const [isBlocked, setIsBlocked] = useState(true);
   const [gameStarted, setGameStarted] = useState(false);
@@ -25,7 +24,7 @@ function MemoryCardGame() {
     shuffleArray(cardsBDs);
     const cardsBD = cardsBDs.slice(0, 6);
 
-    if (cardsBD) {
+    if (cardsBD.length>0) {
       const copiaCard = [];
 
       for (let i = 0; i < cardsBD.length; i++) {
@@ -101,35 +100,14 @@ function MemoryCardGame() {
     // Almacenar la posición actual de la ventana en el localStorage
     localStorage.setItem("scrollPosition", window.scrollY.toString());
     // Recargar la página
-
     window.location.reload();
   }
 
-  /*   useEffect(() => {
-    if (timeLeft === 0) return;
-
-    const intervalId = setInterval(() => {
-      setTimeLeft((prevTimeLeft) => prevTimeLeft - 1);
-    }, 1000);
-
-    return () => clearInterval(intervalId);
-  }, [timeLeft]); */
-
-  /*   useEffect(() => {
-    if (timeLeft === 0) return;
-    const intervalId = setInterval(() => {
-      setTimeLeft((prevTimeLeft) => prevTimeLeft - 1);
-    }, 1000);
-
-    if (numberSuccesses === 12) {
-      clearInterval(intervalId);
-    }
-    return () => clearInterval(intervalId);
-
-  }, [numberSuccesses]); */
-
   useEffect(() => {
-    if (numberSuccesses === 12) {
+    console.log("numberSuccesses", numberSuccesses);
+    console.log("cards.length", cards.length);
+
+    if (cards.length > 0 && numberSuccesses === cards.length) {
       alert("Felicitaciones, Acertaste todas!!");
       setIsReloadDisabled(false);
     }
@@ -139,7 +117,6 @@ function MemoryCardGame() {
     setIsBlocked(false);
     setTimeLeft(3);
     setGameStarted(true);
-    
   };
 
   useEffect(() => {
@@ -153,10 +130,6 @@ function MemoryCardGame() {
     }
     return () => clearTimeout(timer);
   }, [timeLeft, isBlocked]);
-
-
- console.log("cardsBD",cards)
-
 
   return (
     <div>
@@ -194,7 +167,7 @@ function MemoryCardGame() {
               {cards.map((card, index) => (
                 <Components.MemoryCardGame
                   key={index}
-                  name={card.name}
+                  card={card.name}
                   image={card.image}
                   number={index}
                   frontFace={card.face}
