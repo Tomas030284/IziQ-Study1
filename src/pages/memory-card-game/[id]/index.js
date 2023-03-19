@@ -154,6 +154,10 @@ function MemoryCardGame() {
     return () => clearTimeout(timer);
   }, [timeLeft, isBlocked]);
 
+
+ console.log("cardsBD",cards)
+
+
   return (
     <div>
       {cards.length > 0 && (
@@ -189,7 +193,7 @@ function MemoryCardGame() {
             >
               {cards.map((card, index) => (
                 <Components.MemoryCardGame
-                  key={card.face}
+                  key={index}
                   name={card.name}
                   image={card.image}
                   number={index}

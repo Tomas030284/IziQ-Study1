@@ -5,10 +5,10 @@ import ReactCardFlip from "react-card-flip";
 
 import backFace from "../../../public/studyGame.png";
 
-const MemoryCardGame = (name, isBlocked) => {
+const MemoryCardGame = (name, isBlocked, number) => {
   /* const [isFlipped, setIsFlipped] = useState(false); */
   const [isFlipped, setIsFlipped] = useState(name.isBlocked ? false : true);
-  
+
   const [hasEvent, setHasEvent] = useState(true);
   const [isStarting, setIsStarting] = useState(true);
   const [timeLeft, setTimeLeft] = useState(50);
@@ -25,25 +25,15 @@ const MemoryCardGame = (name, isBlocked) => {
     }
   }, [name.disabledCards, name.number]);
 
-     useEffect(() => {
-       if (isStarting && !name.isBlocked) {
-         setIsFlipped(true);
-         setTimeout(() => {
-           setIsStarting(false);
-           setIsFlipped(false);
-         }, 3000);
-       }
-     }, [isStarting, !name.isBlocked]); 
-
   useEffect(() => {
-    if (timeLeft === 0) return;
-
-    const intervalId = setInterval(() => {
-      setTimeLeft((prevTimeLeft) => prevTimeLeft - 1);
-    }, 1000);
-
-    return () => clearInterval(intervalId);
-  }, [timeLeft]);
+    if (isStarting && !name.isBlocked) {
+      setIsFlipped(true);
+      setTimeout(() => {
+        setIsStarting(false);
+        setIsFlipped(false);
+      }, 3000);
+    }
+  }, [isStarting, !name.isBlocked]);
 
   const handleClick = (e) => {
     const value = name.flipCard(name.name, name.number);
@@ -51,6 +41,12 @@ const MemoryCardGame = (name, isBlocked) => {
       setIsFlipped(!isFlipped);
     }
   };
+
+  console.log("name.image", name.image);
+  console.log("name", typeof name);
+
+  const keys = Object.keys(name);
+  console.log(keys.length);
 
   return (
     <Chakra.Box
@@ -109,11 +105,6 @@ const MemoryCardGame = (name, isBlocked) => {
           />
         )}
       </ReactCardFlip>
- {/*      <Chakra.Box position="absolute" top="500px" right="200px">
-        <Chakra.Text fontSize="2xl" fontWeight="bold">
-          {timeLeft}
-        </Chakra.Text>
-      </Chakra.Box> */}
     </Chakra.Box>
   );
 };
