@@ -9,7 +9,7 @@ function Card({ id, question, answer, img, deck_id, learned }) {
     } else {
       trans.style.transform = "rotateY(180deg)";
     }
-  };
+  }; 
 
   return (
     <>
