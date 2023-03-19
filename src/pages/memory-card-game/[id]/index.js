@@ -149,7 +149,7 @@ function MemoryCardGame() {
               textAlign="center"
               fontSize="3xl"
               fontWeight="bold"
-              fontFamily="Poppins"
+              //fontFamily="Poppins"
               color="white"
               mb="2"
               mt="2"
@@ -185,7 +185,7 @@ function MemoryCardGame() {
               >
                 <Chakra.Box
                   as="strong"
-                  fontFamily="Poppins"
+                  //fontFamily="Poppins"
                   mr="2"
                   mb="2"
                   mt="3"
