@@ -9,7 +9,7 @@ const MemoryCardGame = (card, isBlocked, number) => {
   const [hasEvent, setHasEvent] = useState(true);
   const [isStarting, setIsStarting] = useState(true);
   const [timeLeft, setTimeLeft] = useState(50);
- 
+
   useEffect(() => {
     if (card.unflippedCards.includes(card.number)) {
       setTimeout(() => setIsFlipped(false), 700);
@@ -88,9 +88,8 @@ const MemoryCardGame = (card, isBlocked, number) => {
             textAlign="center"
             fontSize="20px"
             resize="none"
-            bg="#FFFFFF"
+            bg="white"
             pointerEvents="none"
-            //fontFamily="Poppins"
             value={card.frontFace}
             onClick={hasEvent && !isBlocked ? handleClick : null}
           />

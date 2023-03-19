@@ -17,6 +17,8 @@ function MemoryCardGame() {
   const [timeLeft, setTimeLeft] = useState(3);
   const [isBlocked, setIsBlocked] = useState(true);
   const [gameStarted, setGameStarted] = useState(false);
+  const [messageStarted, setMessageStarted] = useState(false);
+  const [messageSuccess, setMessageSuccess] = useState(false);
   const [isReloadDisabled, setIsReloadDisabled] = useState(true);
 
   useEffect(async () => {
@@ -24,7 +26,7 @@ function MemoryCardGame() {
     shuffleArray(cardsBDs);
     const cardsBD = cardsBDs.slice(0, 6);
 
-    if (cardsBD.length>0) {
+    if (cardsBD.length > 0) {
       const copiaCard = [];
 
       for (let i = 0; i < cardsBD.length; i++) {
@@ -104,12 +106,9 @@ function MemoryCardGame() {
   }
 
   useEffect(() => {
-    console.log("numberSuccesses", numberSuccesses);
-    console.log("cards.length", cards.length);
-
     if (cards.length > 0 && numberSuccesses === cards.length) {
-      alert("Felicitaciones, Acertaste todas!!");
       setIsReloadDisabled(false);
+      setMessageSuccess(true);
     }
   }, [numberSuccesses]);
 
@@ -117,6 +116,7 @@ function MemoryCardGame() {
     setIsBlocked(false);
     setTimeLeft(3);
     setGameStarted(true);
+    setMessageStarted(true);
   };
 
   useEffect(() => {
@@ -136,25 +136,26 @@ function MemoryCardGame() {
       {cards.length > 0 && (
         <>
           <Chakra.Box
-            backgroundColor="rgba(255, 255, 255, 0.25)"
+            background="linear-gradient(to bottom, #360568, #582987)"
             padding="5px 0 30px 0"
             borderRadius="10px"
             width="900px"
-            height="610px"
+            height="600px"
             margin="20px auto"
             boxShadow="0px 0px 5px 0px rgba(0,0,0,0.75)"
+            fontFamily="Montserrat, Noto Sans Arabic, Helvetica Neue, Helvetica, Arial, sans-serif"
           >
             <Chakra.Box
               as="h1"
               textAlign="center"
-              fontSize="3xl"
+              fontSize="4xl"
               fontWeight="bold"
-              //fontFamily="Poppins"
+              width="900px"
               color="white"
               mb="2"
-              mt="2"
+              padding="1"
             >
-              🎲 Memory Game 🎲
+              ✨ Memory Game 🤓 🧠 ✨
             </Chakra.Box>
             <Chakra.Box
               width="900px"
@@ -183,39 +184,58 @@ function MemoryCardGame() {
                 justifyContent="center"
                 alignItems="center"
               >
-                <Chakra.Box
-                  as="strong"
-                  //fontFamily="Poppins"
-                  mr="2"
-                  mb="2"
-                  mt="3"
-                >
-                  {timeLeft > 0 ? (
-                    <>Desbloqueando cartas en {timeLeft} segundos...</>
-                  ) : (
-                    <>Adelante!</>
-                  )}
-                </Chakra.Box>
+                {timeLeft > 0 && messageStarted ? (
+                  <Chakra.Box
+                    as="strong"
+                    border="1px solid black"
+                    padding="2"
+                    color="rgb(51, 51, 51)"
+                    mr="2"
+                    mb="2"
+                    mt="3"
+                    bg="white"
+                    boxShadow="0px 0px 5px 0px rgba(0,0,0,0.75)"
+                    borderRadius="10px"
+                  >
+                    El juego Iniciará en {timeLeft} segs ⏳
+                  </Chakra.Box>
+                ) : null}
+                {messageSuccess && (
+                  <Chakra.Box
+                    as="strong"
+                    border="1px solid black"
+                    padding="2"
+                    color="rgb(51, 51, 51)"
+                    mr="2"
+                    mb="2"
+                    mt="3"
+                    bg="white"
+                    boxShadow="0px 0px 5px 0px rgba(0,0,0,0.75)"
+                    borderRadius="10px"
+                  >
+                    Felicitaciones!!! 🎉🎉🎉 😊
+                  </Chakra.Box>
+                )}
 
                 <Chakra.Button
-                  bg="#3a0ca3"
-                  border="none"
+                  bg="rgb(51, 51, 51)"
                   cursor="pointer"
                   color="white"
                   margin="4"
                   onClick={handleStartGame}
                   disabled={gameStarted}
+                  boxShadow="0px 0px 5px 0px rgba(0,0,0,0.75)"
                 >
                   Iniciar juego
                 </Chakra.Button>
 
                 <Chakra.Button
-                  bg="#3a0ca3"
-                  border="none"
+                  bg="rgb(51, 51, 51)"
                   cursor="pointer"
                   color="white"
                   onClick={reloadPage}
                   disabled={isReloadDisabled}
+                  boxShadow="0px 0px 5px 0px rgba(0,0,0,0.75)"
                 >
                   Volver a jugar
                 </Chakra.Button>
