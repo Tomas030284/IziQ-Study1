@@ -28,7 +28,7 @@ const MemoryCardGame = (card, isBlocked, number) => {
       setTimeout(() => {
         setIsStarting(false);
         setIsFlipped(false);
-      }, 5000);
+      }, 3000);
     }
   }, [isStarting, !card.isBlocked]);
 

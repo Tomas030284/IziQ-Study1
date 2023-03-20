@@ -14,7 +14,7 @@ function MemoryCardGame() {
   const [unflippedCards, setUnflippedCards] = useState([]);
   const [disabledCards, setDisabledCards] = useState([]);
   const [numberSuccesses, setnumberSuccesses] = useState(0);
-  const [timeLeft, setTimeLeft] = useState(5);
+  const [timeLeft, setTimeLeft] = useState(3);
   const [isBlocked, setIsBlocked] = useState(true);
   const [gameStarted, setGameStarted] = useState(false);
   const [messageStarted, setMessageStarted] = useState(false);
@@ -226,7 +226,7 @@ function MemoryCardGame() {
                   disabled={gameStarted}
                   boxShadow="0px 0px 5px 0px rgba(0,0,0,0.75)"
                 >
-                  Iniciar juego
+                  Iniciar
                 </Chakra.Button>
 
                 <Chakra.Button
@@ -237,7 +237,7 @@ function MemoryCardGame() {
                   disabled={isReloadDisabled}
                   boxShadow="0px 0px 5px 0px rgba(0,0,0,0.75)"
                 >
-                  Volver a jugar
+                  Reiniciar
                 </Chakra.Button>
               </Chakra.Flex>
             </Chakra.Box>
