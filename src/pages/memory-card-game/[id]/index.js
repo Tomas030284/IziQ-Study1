@@ -14,7 +14,7 @@ function MemoryCardGame() {
   const [unflippedCards, setUnflippedCards] = useState([]);
   const [disabledCards, setDisabledCards] = useState([]);
   const [numberSuccesses, setnumberSuccesses] = useState(0);
-  const [timeLeft, setTimeLeft] = useState(3);
+  const [timeLeft, setTimeLeft] = useState(5);
   const [isBlocked, setIsBlocked] = useState(true);
   const [gameStarted, setGameStarted] = useState(false);
   const [messageStarted, setMessageStarted] = useState(false);
