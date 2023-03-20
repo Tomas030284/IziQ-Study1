@@ -28,7 +28,7 @@ const MemoryCardGame = (card, isBlocked, number) => {
       setTimeout(() => {
         setIsStarting(false);
         setIsFlipped(false);
-      }, 3000);
+      }, 5000);
     }
   }, [isStarting, !card.isBlocked]);
 
@@ -44,7 +44,7 @@ const MemoryCardGame = (card, isBlocked, number) => {
       display="inline-block"
       margin="5px"
       height="calc(150px - 10px)"
-      width="calc(200px - 10px)"
+      width="calc(215px - 10px)"
       boxShadow="0px 0px 5px 0px rgba(0,0,0,0.75)"
     >
       <ReactCardFlip isFlipped={isFlipped}>
@@ -52,7 +52,7 @@ const MemoryCardGame = (card, isBlocked, number) => {
           src={backFace.src}
           alt="back-face"
           height="calc(150px - 10px)"
-          width="calc(200px - 10px)"
+          width="calc(215px - 10px)"
           border="1px solid black"
           onClick={hasEvent && !card.isBlocked ? handleClick : null}
         />
@@ -60,7 +60,7 @@ const MemoryCardGame = (card, isBlocked, number) => {
         {card.image ? (
           <Chakra.Box
             height="calc(150px - 10px)"
-            width="calc(200px - 10px)"
+            width="calc(215px - 10px)"
             border="1px solid black"
             style={{
               justifyContent: "center",
@@ -69,6 +69,7 @@ const MemoryCardGame = (card, isBlocked, number) => {
               flexDirection: "column",
               alignItems: "center",
               backgroundColor: "white",
+              overflow: "hidden",
             }}
             onClick={hasEvent && !card.isBlocked ? handleClick : null}
           >
@@ -78,12 +79,21 @@ const MemoryCardGame = (card, isBlocked, number) => {
               src={card.image}
               alt="back-face"
             />
-            <h2>{card.frontFace}</h2>
+
+            <Chakra.Box
+              paddingLeft={1}
+              paddingRight={1}
+              paddingBottom={3.5}
+              style={{ textAlign: "center", display: "inline-block" }}
+            >
+              {" "}
+              {card.frontFace}
+            </Chakra.Box>
           </Chakra.Box>
         ) : (
           <Chakra.Textarea
             height="calc(150px - 10px)"
-            width="calc(200px - 10px)"
+            width="calc(215px - 10px)"
             border="3px solid black"
             textAlign="center"
             fontSize="20px"
